@@ -14,7 +14,7 @@ Description
 Examples
 ========
 
-        Use Google's Geocoding API::
+        Using Google's Geocoding API::
 
             from pygeocode import geocoder
 
@@ -22,7 +22,8 @@ Examples
             res = geocoder.geocode_google(address)
             print res['lat'], res['lng']
 
-        Use Yahoo's Place Finder API::
+
+        Using Yahoo's Place Finder API::
 
             from pygeocode import geocoder
 
@@ -30,3 +31,72 @@ Examples
             address = '1600 Amphitheatre Pkwy, Mountain View, CA'
             res = geocoder.geocode_yahoo(address, app_id)
             print res['lat'], res['lng']
+
+
+        Full example::
+
+            import optparse
+            import functools
+            import logging
+
+            from pygeocode import geocoder
+
+            log = logging.getLogger(__name__)
+
+            def main(address, appid=None):
+                yahoo_geocoder = functools.partial(
+                    geocoder.geocode_yahoo,
+                    appid=appid,
+                    )
+                geocoders = [yahoo_geocoder, geocoder.geocode_google]
+                for geocoder_ in geocoders:
+                    try:
+                        res = geocoder_(address)
+                    except geocoder.GeocoderError, e:
+                        log.error(str(e))
+                    else:
+                        return res
+
+            if __name__ == '__main__':
+                parser = optparse.OptionParser(
+                    usage='%prog ADDRESS [OPTS]',
+                    )
+                parser.add_option(
+                    '--yahoo-appid',
+                    help='The Yahoo Application ID to be used in the API call',
+                    )
+                parser.add_option(
+                    '-v', '--verbose',
+                    help='Verbose mode [default %default]',
+                    action="store_true", dest="verbose"
+                    )
+                parser.set_defaults(
+                    verbose=False,
+                    )
+
+                options, args = parser.parse_args()
+                try:
+                    (address,) = args
+                except ValueError:
+                    parser.error('Wrong number of arguments.')
+
+                logging.basicConfig(
+                    level=logging.DEBUG if options.verbose else logging.INFO,
+                    format='%(asctime)s.%(msecs)03d %(name)s: %(levelname)s: %(message)s',
+                    datefmt='%Y-%m-%dT%H:%M:%S',
+                    )
+
+                res = main(address, appid=options.yahoo_appid)
+
+                if res:
+                    out = '"{address}" is at coordinates {lat},{lng}'.format(
+                        address=address,
+                        lat=res['lat'],
+                        lng=res['lng'],
+                        )
+                else:
+                    out = 'No results found for "{address}"'.format(
+                        address=address,
+                        )
+
+                print out

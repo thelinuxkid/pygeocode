@@ -38,6 +38,31 @@ class TestGeocoder(object):
         eq(data, expected)
 
     @fudge.with_fakes
+    def test_yahoo_geocode_no_app_id(self):
+        fake_urllib2 = fudge.Fake('urllib2')
+        fake_urllib2.remember_order()
+
+        urlopen = fake_urllib2.expects('urlopen')
+        urlopen.with_args(
+            'http://where.yahooapis.com/geocode?'
+            'location=1821+Pacific+Coast+Hwy%2C+Hermosa+Beach%2C+California+90254'
+            '&flags=J'
+            )
+        res = """{"ResultSet":{"version":"1.0","Error":0,"ErrorMessage":"No error","Locale":"us_US","Quality":87,"Found":1,"Results":[{"quality":87,"latitude":"33.86829","longitude":"-118.394024","offsetlat":"33.868267","offsetlon":"-118.394174","radius":500,"name":"","line1":"1821 Pacific Coast Hwy, #11","line2":"Hermosa Beach, CA  90254-3125","line3":"","line4":"United States","house":"1821","street":"Pacific Coast Hwy","xstreet":"","unittype":"","unit":"#11","postal":"90254-3125","neighborhood":"","city":"Hermosa Beach","county":"Los Angeles County","state":"California","country":"United States","countrycode":"US","statecode":"CA","countycode":"","uzip":"90254","hash":"0F843448232C6E64","woeid":12795734,"woetype":11}]}}"""
+        urlopen.returns(StringIO(res))
+
+        data = geocoder.geocode_yahoo(
+            '1821 Pacific Coast Hwy, Hermosa Beach, California 90254',
+            _urllib2=fake_urllib2,
+            )
+
+        expected = OrderedDict([
+            ('lat', 33.868290),
+            ('lng', -118.394024),
+            ])
+        eq(data, expected)
+
+    @fudge.with_fakes
     def test_yahoo_geocode_ambiguous_result_error(self):
         fake_urllib2 = fudge.Fake('urllib2')
         fake_urllib2.remember_order()

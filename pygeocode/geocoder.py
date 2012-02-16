@@ -98,7 +98,7 @@ def geocode_google(
 
 def geocode_yahoo(
     address,
-    yahoo_appid,
+    appid=None,
     _urllib2=None,
     ):
 
@@ -108,8 +108,9 @@ def geocode_yahoo(
     query = OrderedDict([
         ('location', address),
         ('flags', 'J'),
-        ('appid', yahoo_appid),
         ])
+    if appid is not None:
+        query['appid'] = appid
     query = urllib.urlencode(query)
     url = '{api_url}?{query}'.format(
         api_url=yahoo_places_api_url,

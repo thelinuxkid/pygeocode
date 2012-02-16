@@ -5,4 +5,12 @@
 *.pyo
 .*.swp
 
+/parts
+/.installed.cfg
+/develop-eggs
+/*.egg-info
+/eggs
+/bin
+/build
+/dist
 /setup

@@ -11,6 +11,14 @@ Description
         API's rate limit or when an API returns ambiguous results, or
         no results at all.
 
+Installation
+============
+
+        You can use pip or easy_install
+
+            - pip install pygeocode
+            - easy_install pygeocode
+
 Examples
 ========
 

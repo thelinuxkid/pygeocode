@@ -20,7 +20,7 @@ setup(
     author_email="andres@thelinuxkid.com, cmsimike@gmail.com, tv@eagain.net",
     maintainer="Andres Buritica",
     maintainer_email="andres@thelinuxkid.com",
-    url='https://github.com/andresburitica/pygeocode',
+    url='https://github.com/thelinuxkid/pygeocode',
     packages = find_packages(),
     namespace_packages = ['pygeocode'],
     test_suite='nose.collector',

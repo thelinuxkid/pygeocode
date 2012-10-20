@@ -14,10 +14,13 @@ no results at all.
 Installation
 ============
 
-You can use pip or easy_install
+Install using pip::
 
-- pip install pygeocode
-- easy_install pygeocode
+    pip install pyusps
+
+or easy_install::
+
+    easy_install pyusps
 
 Examples
 ========

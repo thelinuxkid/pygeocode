@@ -14,7 +14,7 @@ for k,v in EXTRAS_REQUIRES.iteritems():
 
 setup(
     name='pygeocode',
-    version='0.0.1',
+    version='0.0.2',
     description="pygeocode -- Wrapper for several public geocoding APIs",
     author='Andres Buritica, Mike Megally, Tommi Virtanen',
     author_email="andres@thelinuxkid.com, cmsimike@gmail.com, tv@eagain.net",

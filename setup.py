@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from setuptools import setup, find_packages
+import os
 
 EXTRAS_REQUIRES = dict(
     test=[
@@ -14,12 +15,14 @@ for k,v in EXTRAS_REQUIRES.iteritems():
     EXTRAS_REQUIRES['test'] += v
 
 # Pypi package documentation
-with open('README.rst') as fp:
+root = os.path.dirname(__file__)
+path = os.path.join(root, 'README.rst')
+with open(path) as fp:
     long_description = fp.read()
 
 setup(
     name='pygeocode',
-    version='0.0.3',
+    version='0.0.4',
     description="pygeocode -- Wrapper for several public geocoding APIs",
     long_description=long_description,
     author='Andres Buritica, Mike Megally, Tommi Virtanen',
@@ -27,6 +30,7 @@ setup(
     maintainer="Andres Buritica",
     maintainer_email="andres@thelinuxkid.com",
     url='https://github.com/thelinuxkid/pygeocode',
+    license='MIT',
     packages = find_packages(),
     namespace_packages = ['pygeocode'],
     test_suite='nose.collector',

@@ -108,3 +108,35 @@ Examples
                         )
 
                 print out
+
+Building
+========
+
+External dependencies
+---------------------
+
+    - python-dev
+    - python-setuptools
+    - python-virtualenv
+
+Developing
+==========
+
+Go to the root directory of the project and run::
+
+      # I like to install the virtual environment in its own
+      # hidden repo but you don't have to
+      virtualenv .virtual
+      # I leave the magic to Ruby developers (.virtual/bin/activate)
+      # but you don't have to agree with me
+      .virtual/bin/python setup.py develop
+      # Install development and testing dependecies. Pip doesn't seem
+      # to handle extras_require yet: https://github.com/pypa/pip/issues/7.
+      # So, use easy_install
+      # At this point, pygeocode will already be in easy-install.pth.
+      # So easy_install will not attempt to download it
+      .virtual/bin/easy_install pygeocode[test]
+
+You can now run the tests::
+
+     .virtual/bin/nosetests

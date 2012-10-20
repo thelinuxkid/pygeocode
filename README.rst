@@ -1,11 +1,11 @@
 =========
-Pygeocode
+pygeocode
 =========
 
 Description
 ===========
 
-        Pygeocode leverages multiple public geocoding APIs including
+        pygeocode leverages multiple public geocoding APIs including
         Google's Geocoding API and Yahoo's Place Finder. Having several
         APIs available is specially useful when the user has reached one
         API's rate limit or when an API returns ambiguous results, or

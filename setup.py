@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 
 EXTRAS_REQUIRES = dict(
     test=[
-        'fudge'
+        'fudge>=1.0.3',
+        'nose>=1.1.2',
         ],
     )
 

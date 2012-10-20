@@ -13,10 +13,15 @@ for k,v in EXTRAS_REQUIRES.iteritems():
         continue
     EXTRAS_REQUIRES['test'] += v
 
+# Pypi package documentation
+with open('README.rst') as fp:
+    long_description = fp.read()
+
 setup(
     name='pygeocode',
     version='0.0.3',
     description="pygeocode -- Wrapper for several public geocoding APIs",
+    long_description=long_description,
     author='Andres Buritica, Mike Megally, Tommi Virtanen',
     author_email="andres@thelinuxkid.com, cmsimike@gmail.com, tv@eagain.net",
     maintainer="Andres Buritica",

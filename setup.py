@@ -22,7 +22,7 @@ with open(path) as fp:
 
 setup(
     name='pygeocode',
-    version='0.0.4',
+    version='0.0.5',
     description="pygeocode -- Wrapper for several public geocoding APIs",
     long_description=long_description,
     author='Andres Buritica, Mike Megally, Tommi Virtanen',
